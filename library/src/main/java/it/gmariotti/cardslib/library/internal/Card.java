@@ -706,7 +706,7 @@ public class Card extends BaseCard {
         if (area < CLICK_LISTENER_ALL_VIEW && area > CLICK_LISTENER_CONTENT_VIEW)
             Log.w(TAG, "area value not valid in addPartialOnClickListner");
 
-        HashMap multipleOnClickListener = getMultipleOnClickListener();
+        HashMap<Integer, OnCardClickListener> multipleOnClickListener = getMultipleOnClickListener();
         if (onClickListener != null) {
             multipleOnClickListener.put(area, onClickListener);
             mIsClickable = true;
@@ -729,7 +729,7 @@ public class Card extends BaseCard {
      */
     public void removePartialOnClickListener(int area) {
 
-        HashMap multipleOnClickListener = getMultipleOnClickListener();
+        HashMap<Integer, OnCardClickListener>  multipleOnClickListener = getMultipleOnClickListener();
         multipleOnClickListener.remove(area);
 
         if (mOnClickListener == null && multipleOnClickListener.isEmpty())

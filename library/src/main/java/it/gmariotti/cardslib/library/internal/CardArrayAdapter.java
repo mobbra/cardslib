@@ -236,6 +236,7 @@ public class CardArrayAdapter extends BaseCardArrayAdapter implements UndoBarCon
 
         @Override
         public boolean canDismiss(int position, Card card) {
+        	if (card==null) return false;
             return card.isSwipeable();
         }
 
