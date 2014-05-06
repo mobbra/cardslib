@@ -245,11 +245,12 @@ public class CardArrayAdapter extends BaseCardArrayAdapter implements UndoBarCon
 
             int[] itemPositions=new int[reverseSortedPositions.length];
             String[] itemIds=new String[reverseSortedPositions.length];
+            int getHeaderViewsCount = listView.getHeaderViewsCount();
             int i=0;
 
             //Remove cards and notifyDataSetChanged
             for (int position : reverseSortedPositions) {
-                Card card = getItem(position);
+                Card card = getItem(position-getHeaderViewsCount);
                 itemPositions[i]=position;
                 itemIds[i]=card.getId();
                 i++;
