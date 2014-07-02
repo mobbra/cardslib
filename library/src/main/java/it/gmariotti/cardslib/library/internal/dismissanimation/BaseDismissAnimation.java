@@ -56,7 +56,6 @@ public abstract class BaseDismissAnimation {
 
 
     private List<PendingDismissData> mPendingDismisses = new ArrayList<PendingDismissData>();
-    private int mDownPosition;
     private int mDismissAnimationRefCount = 0;
 
     //--------------------------------------------------------------------------
@@ -212,7 +211,7 @@ public abstract class BaseDismissAnimation {
 
     private void dismissiCardWithAnimation(final CardView cardView) {
         ++mDismissAnimationRefCount;
-        int mDownPosition = mCardListView.getPositionForView(cardView);
+        mCardListView.getPositionForView(cardView);
 
         animate(cardView.getCard(),cardView);
     }
@@ -244,10 +243,6 @@ public abstract class BaseDismissAnimation {
                         dismissPositions[i] = mPendingDismisses.get(i).position;
                     }
                     mCallbacks.onDismiss(mCardListView, dismissPositions);
-
-                    // Reset mDownPosition to avoid MotionEvent.ACTION_UP trying to start a dismiss
-                    // animation with a stale position
-                    mDownPosition = ListView.INVALID_POSITION;
 
                     ViewGroup.LayoutParams lp;
                     for (PendingDismissData pendingDismiss : mPendingDismisses) {
@@ -332,37 +327,6 @@ public abstract class BaseDismissAnimation {
 
         }
     };
-
-
-
-
-
-    private Animator createAnimatorForView(final View view) {
-        final ViewGroup.LayoutParams lp = view.getLayoutParams();
-        final int originalHeight = view.getHeight();
-
-        ValueAnimator animator = ValueAnimator.ofInt(originalHeight, 0);
-        animator.addListener(new AnimatorListenerAdapter() {
-
-            @Override
-            public void onAnimationEnd(final Animator animator) {
-                lp.height = 0;
-                view.setLayoutParams(lp);
-            }
-        });
-
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-            @Override
-            public void onAnimationUpdate(final ValueAnimator valueAnimator) {
-                lp.height = (Integer) valueAnimator.getAnimatedValue();
-                view.setLayoutParams(lp);
-            }
-        });
-
-        return animator;
-    }
-
 
     //--------------------------------------------------------------------------
     // Getters and setters

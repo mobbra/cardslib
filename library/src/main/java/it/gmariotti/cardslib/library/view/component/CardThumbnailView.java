@@ -602,7 +602,6 @@ public class CardThumbnailView extends FrameLayout implements CardViewInterface 
         @Override
         protected Bitmap doInBackground(CardThumbnail.CustomSource... params) {
             customSource = params[0];
-            ImageView thumbnail = imageViewReference.get();
             Bitmap bitmap = customSource.getBitmap();
             if (bitmap!=null){
                 addBitmapToMemoryCache(customSource.getTag(), bitmap);

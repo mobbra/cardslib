@@ -52,8 +52,6 @@ public class MultiChoiceAdapterHelperBase implements AdapterView.OnItemLongClick
      */
     protected ActionMode actionMode;
 
-    private boolean ignoreCheckedListener;
-
     // -------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------

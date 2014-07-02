@@ -171,9 +171,6 @@ public abstract class TwoCardOverlayAnimation extends BaseCardOverlayAnimation {
         final View viewLastIn = mInternalLayoutOverlay.getChildAt(0);
         //final View viewIn = card.getCardView().findViewById(R.id.afterContent);
 
-        //Views to remove
-        final View[] viewsFirstOut = getOutViews(card, infoAnimation);
-
         if (viewLastIn != null) {
             viewLastIn.animate()
                     .alpha(0f)
